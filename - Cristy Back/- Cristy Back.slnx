@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Cristy.Dominio/Cristy.Dominio.csproj" />
+  <Project Path="Cristy.Repositorio/Cristy.Repositorio.csproj" />
+</Solution>
