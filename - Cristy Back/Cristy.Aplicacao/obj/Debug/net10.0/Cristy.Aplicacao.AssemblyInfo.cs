@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cristy.Aplicacao")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9f9f842057d9e4061ddb17dc2f988c318ac1e31")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+905cdc8223e53eed4aa85582b05553307f02a9a5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cristy.Aplicacao")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cristy.Aplicacao")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

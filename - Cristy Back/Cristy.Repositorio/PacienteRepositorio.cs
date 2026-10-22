@@ -1,6 +1,6 @@
 using Cristy.Dominio.Entidades;
+using Cristy.Dominio.Interfaces;
 using Cristy.Repositorio.Contexto;
-using Cristy.Repositorio.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cristy.Repositorio
@@ -28,7 +28,7 @@ namespace Cristy.Repositorio
                         .FirstOrDefaultAsync();
         }   
 
-        public async Task<int> SalvarAsync(Paciente paciente)
+        public async Task<int> CriarAsync(Paciente paciente)
         {
             _contexto.Pacientes.Add(paciente);
             await _contexto.SaveChangesAsync();
