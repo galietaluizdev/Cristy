@@ -7,24 +7,33 @@ namespace Cristy.Repositorio
 {
     public class PacienteRepositorio(CristyContext contexto) : BaseRepositorio(contexto), IPacienteRepositorio
     {
-        public Task AtualizarAsync(Paciente paciente)
+        public async Task AtualizarAsync(Paciente paciente)
         {
-            throw new NotImplementedException();
+            _contexto.Pacientes.Update(paciente);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Paciente>> ListarAsync(bool Ativo)
+        public async Task<IEnumerable<Paciente>> ListarAsync(bool Ativo)
         {
-            throw new NotImplementedException();
+            return await _contexto.Pacientes
+                        .Where(p => p.Ativo == Ativo)
+                        .ToListAsync();
         }
 
         public async Task<Paciente> ObterAsync(int Id)
         {
-            return await _contexto.Pacientes.Where(p => p.Id == Id).Where(p => p.Ativo).FirstOrDefaultAsync();
+            return await _contexto.Pacientes
+                        .Where(p => p.Id == Id)
+                        .Where(p => p.Ativo)
+                        .FirstOrDefaultAsync();
         }   
 
-        public Task<int> SalvarAsync(Paciente paciente)
+        public async Task<int> SalvarAsync(Paciente paciente)
         {
-            throw new NotImplementedException();
+            _contexto.Pacientes.Add(paciente);
+            await _contexto.SaveChangesAsync();
+
+            return paciente.Id;
         }
     }
 }
