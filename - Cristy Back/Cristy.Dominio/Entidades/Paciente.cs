@@ -8,7 +8,7 @@ namespace Cristy.Dominio.Entidades
         public string Telefone { get; set; }
         public DateOnly DataDeNascimento { get; set; }
         public bool Ativo { get; set; }
-        Paciente()
+        public Paciente()
         {
             Ativo = true;
         }
@@ -20,6 +20,11 @@ namespace Cristy.Dominio.Entidades
         public void Restaurar()
         {
             Ativo = true;
+        }
+
+        public static implicit operator Paciente(Task<IEnumerable<Paciente>> v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
