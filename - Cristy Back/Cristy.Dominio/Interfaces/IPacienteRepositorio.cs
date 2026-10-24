@@ -1,5 +1,4 @@
 using Cristy.Dominio.Entidades;
-
 namespace Cristy.Dominio.Interfaces
 {
     public interface IPacienteRepositorio

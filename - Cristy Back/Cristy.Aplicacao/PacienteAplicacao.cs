@@ -1,57 +1,117 @@
 
 using Cristy.Aplicacao.Interfaces;
+using Cristy.Aplicacao.Models.Paciente;
+using Cristy.Aplicacao.Models.Paciente;
 using Cristy.Aplicacao.Models.Paciente.Requisicao;
+using Cristy.Aplicacao.Models.Paciente.Resposta;
 using Cristy.Dominio.Entidades;
 using Cristy.Dominio.Interfaces;
+using Microsoft.VisualBasic;
 namespace Cristy.Aplicacao
 {
 
     public class PacienteAplicacao(IPacienteRepositorio PacienteRepositorio) : IPacienteAplicacao
     {
-        readonly IPacienteRepositorio _PacienteRepositorio = PacienteRepositorio;
+        readonly IPacienteRepositorio _pacienteRepositorio = PacienteRepositorio;
 
         #region Regras
-        public async Task<int> CriarAsync(Paciente p)
+        public async Task<int> CriarAsync(PacienteCriarDTO p)
         {
-            await Validacao(p);
 
-            await _PacienteRepositorio.CriarAsync(p);
-            return p.Id;
+            var paciente = new Paciente()
+            {
+                Nome = p.Nome,
+                Email = p.Email,
+                Telefone = p.Telefone,
+                DataDeNascimento = p.DataDeNascimento
+            };
+
+            await ValidacaoGeral(paciente);
+
+            await _pacienteRepositorio.CriarAsync(paciente);
+
+            return paciente.Id;
         }
-        public Task<Paciente> ObterAsync(int Id)
+        public async Task<PacienteRespostaDTO> ObterAsync(int Id)
         {
-            throw new NotImplementedException();
+            var p = await _pacienteRepositorio.ObterAsync(Id) ?? throw new Exception("Paciente não encontrado");
+
+            var resposta = new PacienteRespostaDTO()
+            {
+                Nome = p.Nome,
+                Email = p.Email,
+                Telefone = p.Telefone,
+                DataDeNascimento = p.DataDeNascimento,
+                Ativo = p.Ativo
+            };
+            return resposta;
         }
-        public Task<IEnumerable<Paciente>> ListarAsync(bool ativo)
+
+        public async Task<IEnumerable<PacienteRespostaDTO>> ListarAsync(bool ativo)
         {
-            throw new NotImplementedException();
+            var pLista = await _pacienteRepositorio.ListarAsync(ativo);
+            var resposta = pLista.Select(p => new PacienteRespostaDTO
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Email = p.Email,
+                Telefone = p.Telefone,
+                DataDeNascimento = p.DataDeNascimento,
+            }).ToList();
+            
+            return resposta;
+
         }
-        public Task AtualizarAsync(PacienteAtualizar paciente)
+
+        public async Task AtualizarAsync(PacienteAtualizar p)
         {
-            throw new NotImplementedException();
+            var paciente = new Paciente()
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Email = p.Email,
+                Telefone = p.Telefone,
+                DataDeNascimento = p.DataDeNascimento,
+                Ativo = p.Ativo
+            };
+            await ValidarAtualizar(paciente);
         }
         #endregion
         #region Validação
-        private static async Task Validacao(Paciente paciente)
+
+        private static async Task ValidacaoGeral(Paciente p)
         {
-            if (paciente == null)
+            int anoMinimo = DateOnly.FromDateTime(DateTime.Now).Year - 120;
+            if (p == null)
             {
                 throw new Exception("Paciente não pode ser vazio");
             }
-            if (string.IsNullOrEmpty(paciente.Nome))
+            if (string.IsNullOrEmpty(p.Nome))
             {
                 throw new Exception("Nome não pode ser vazio");
             }
-            if (string.IsNullOrEmpty(paciente.Email))
+            if (string.IsNullOrEmpty(p.Email))
             {
                 throw new Exception("E-mail não pode ser vazio");
             }
+            if (string.IsNullOrEmpty(p.Telefone))
+            {
+                throw new Exception("Telefone invalida não pode ser vazio");
+            }
+            if (p.DataDeNascimento.Year < anoMinimo)
+            {
+                throw new Exception("Data de nascimento invalida ");
+            }
+        }
+        private static async Task ValidarAtualizar(Paciente p)
+        {
+            await ValidacaoGeral(p);
+            if (p.Id <= 0)
+            {
+                throw new Exception("ID invalido");
+            }
         }
 
-        public Task AtualizarAsync(Paciente paciente)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }
