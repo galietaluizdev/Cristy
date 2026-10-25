@@ -1,6 +1,6 @@
 namespace Cristy.Aplicacao.Models.Paciente.Requisicao
 {
-    public class PacienteCriarDTO
+    public class PacienteCadastrarDTO
     {
         public string Nome { get; set; }
         public string Email { get; set; }

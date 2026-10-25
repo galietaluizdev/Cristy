@@ -6,7 +6,7 @@ namespace Cristy.Aplicacao.Interfaces
 {
     public interface IPacienteAplicacao
     {
-        Task<int> CriarAsync(PacienteCriarDTO paciente);
+        Task<int> CadastrarAsync(PacienteCadastrarDTO paciente);
         Task<PacienteRespostaDTO> ObterAsync(int Id);
         Task<IEnumerable<PacienteRespostaDTO>> ListarAsync(bool ativo);
         Task AtualizarAsync(PacienteAtualizar paciente);

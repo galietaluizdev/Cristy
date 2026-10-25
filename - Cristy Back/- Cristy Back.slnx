@@ -2,4 +2,5 @@
   <Project Path="Cristy.Aplicacao/Cristy.Aplicacao.csproj" />
   <Project Path="Cristy.Dominio/Cristy.Dominio.csproj" />
   <Project Path="Cristy.Repositorio/Cristy.Repositorio.csproj" />
+  <Project Path="Cristy.API/Cristy.API.csproj" />
 </Solution>

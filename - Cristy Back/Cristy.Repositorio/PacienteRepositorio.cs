@@ -28,7 +28,7 @@ namespace Cristy.Repositorio
                         .FirstOrDefaultAsync();
         }   
 
-        public async Task<int> CriarAsync(Paciente paciente)
+        public async Task<int> CadastrarAsync(Paciente paciente)
         {
             _contexto.Pacientes.Add(paciente);
             await _contexto.SaveChangesAsync();

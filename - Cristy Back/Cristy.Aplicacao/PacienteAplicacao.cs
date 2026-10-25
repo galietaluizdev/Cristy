@@ -1,12 +1,12 @@
 
 using Cristy.Aplicacao.Interfaces;
 using Cristy.Aplicacao.Models.Paciente;
-using Cristy.Aplicacao.Models.Paciente;
+// using Cristy.Aplicacao.Models.Paciente;
 using Cristy.Aplicacao.Models.Paciente.Requisicao;
 using Cristy.Aplicacao.Models.Paciente.Resposta;
 using Cristy.Dominio.Entidades;
 using Cristy.Dominio.Interfaces;
-using Microsoft.VisualBasic;
+// using Microsoft.VisualBasic;
 namespace Cristy.Aplicacao
 {
 
@@ -15,7 +15,7 @@ namespace Cristy.Aplicacao
         readonly IPacienteRepositorio _pacienteRepositorio = PacienteRepositorio;
 
         #region Regras
-        public async Task<int> CriarAsync(PacienteCriarDTO p)
+        public async Task<int> CadastrarAsync(PacienteCadastrarDTO p)
         {
 
             var paciente = new Paciente()
@@ -28,7 +28,7 @@ namespace Cristy.Aplicacao
 
             await ValidacaoGeral(paciente);
 
-            await _pacienteRepositorio.CriarAsync(paciente);
+            await _pacienteRepositorio.CadastrarAsync(paciente);
 
             return paciente.Id;
         }
