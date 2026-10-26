@@ -9,6 +9,7 @@ namespace Cristy.Aplicacao.Interfaces
         Task<int> CadastrarAsync(PacienteCadastrarDTO paciente);
         Task<PacienteRespostaDTO> ObterAsync(int Id);
         Task<IEnumerable<PacienteRespostaDTO>> ListarAsync(bool ativo);
-        Task AtualizarAsync(PacienteAtualizar paciente);
+        Task AtualizarAsync(PacienteAtualizarDTO paciente);
+        Task DefinirSituacaoAsync(bool Ativo, int Id);
     }
 }

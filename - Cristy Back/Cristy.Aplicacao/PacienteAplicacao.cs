@@ -28,9 +28,10 @@ namespace Cristy.Aplicacao
 
             await ValidacaoGeral(paciente);
 
-            await _pacienteRepositorio.CadastrarAsync(paciente);
+            var id = await _pacienteRepositorio.CadastrarAsync(paciente);
 
-            return paciente.Id;
+
+            return id;
         }
         public async Task<PacienteRespostaDTO> ObterAsync(int Id)
         {
@@ -38,6 +39,7 @@ namespace Cristy.Aplicacao
 
             var resposta = new PacienteRespostaDTO()
             {
+                Id = p.Id,
                 Nome = p.Nome,
                 Email = p.Email,
                 Telefone = p.Telefone,
@@ -46,7 +48,6 @@ namespace Cristy.Aplicacao
             };
             return resposta;
         }
-
         public async Task<IEnumerable<PacienteRespostaDTO>> ListarAsync(bool ativo)
         {
             var pLista = await _pacienteRepositorio.ListarAsync(ativo);
@@ -57,26 +58,44 @@ namespace Cristy.Aplicacao
                 Email = p.Email,
                 Telefone = p.Telefone,
                 DataDeNascimento = p.DataDeNascimento,
+                Ativo = p.Ativo
             }).ToList();
-            
+
             return resposta;
 
         }
-
-        public async Task AtualizarAsync(PacienteAtualizar p)
+        public async Task AtualizarAsync(PacienteAtualizarDTO p)
         {
-            var paciente = new Paciente()
+            var validado = new Paciente() // conversao para validação
             {
                 Id = p.Id,
                 Nome = p.Nome,
                 Email = p.Email,
                 Telefone = p.Telefone,
                 DataDeNascimento = p.DataDeNascimento,
-                Ativo = p.Ativo
             };
-            await ValidarAtualizar(paciente);
+            await ValidarAtualizar(validado); // se nenhuma excessão for lançada, ele faz a busca no banco
+
+            var banco = await _pacienteRepositorio.ObterAsync(p.Id);
+
+            banco.Id = p.Id;
+            banco.Nome = p.Nome;
+            banco.Email = p.Email;
+            banco.Telefone = p.Telefone;
+            banco.DataDeNascimento = p.DataDeNascimento;
+
+            await _pacienteRepositorio.AtualizarAsync(banco);
+        }
+        public async Task DefinirSituacaoAsync(bool ativo, int Id)
+        {
+            var paciente = await _pacienteRepositorio.ObterAsync(Id) ?? throw new Exception("Paciente não encontrado");
+
+            paciente.DefinirSituacaoAsync(ativo);
+
+            await _pacienteRepositorio.AtualizarAsync(paciente);
         }
         #endregion
+
         #region Validação
 
         private static async Task ValidacaoGeral(Paciente p)

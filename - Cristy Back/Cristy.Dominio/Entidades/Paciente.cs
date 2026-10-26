@@ -12,19 +12,9 @@ namespace Cristy.Dominio.Entidades
         {
             Ativo = true;
         }
-        public void Deletar()
+        public void DefinirSituacaoAsync(bool ativo)
         {
-            Ativo = false;
-        }
-
-        public void Restaurar()
-        {
-            Ativo = true;
-        }
-
-        public static implicit operator Paciente(Task<IEnumerable<Paciente>> v)
-        {
-            throw new NotImplementedException();
+            Ativo = ativo;
         }
     }
 }

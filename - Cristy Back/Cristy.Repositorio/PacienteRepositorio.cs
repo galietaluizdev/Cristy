@@ -24,7 +24,6 @@ namespace Cristy.Repositorio
         {
             return await _contexto.Pacientes
                         .Where(p => p.Id == Id)
-                        .Where(p => p.Ativo)
                         .FirstOrDefaultAsync();
         }   
 

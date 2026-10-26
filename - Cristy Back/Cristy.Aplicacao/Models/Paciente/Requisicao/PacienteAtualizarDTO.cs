@@ -1,6 +1,6 @@
 namespace Cristy.Aplicacao.Models.Paciente.Requisicao
 {
-    public class PacienteAtualizar
+    public class PacienteAtualizarDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
