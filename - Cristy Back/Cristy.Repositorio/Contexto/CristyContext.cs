@@ -6,6 +6,7 @@ namespace Cristy.Repositorio.Contexto
     public class CristyContext(DbContextOptions<CristyContext> options) : DbContext(options)
     {
         public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Dentista> Dentistas { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

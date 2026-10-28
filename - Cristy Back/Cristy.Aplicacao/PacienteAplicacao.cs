@@ -35,18 +35,18 @@ namespace Cristy.Aplicacao
         }
         public async Task<PacienteRespostaDTO> ObterAsync(int Id)
         {
-            var p = await _pacienteRepositorio.ObterAsync(Id) ?? throw new Exception("Paciente não encontrado");
+                Paciente p = await _pacienteRepositorio.ObterAsync(Id) ?? throw new Exception("Paciente não encontrado");
 
-            var resposta = new PacienteRespostaDTO()
-            {
-                Id = p.Id,
-                Nome = p.Nome,
-                Email = p.Email,
-                Telefone = p.Telefone,
-                DataDeNascimento = p.DataDeNascimento,
-                Ativo = p.Ativo
-            };
-            return resposta;
+                var resposta = new PacienteRespostaDTO()
+                {
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Email = p.Email,
+                    Telefone = p.Telefone,
+                    DataDeNascimento = p.DataDeNascimento,
+                    Ativo = p.Ativo
+                };
+                return resposta;
         }
         public async Task<IEnumerable<PacienteRespostaDTO>> ListarAsync(bool ativo)
         {
@@ -94,6 +94,7 @@ namespace Cristy.Aplicacao
 
             await _pacienteRepositorio.AtualizarAsync(paciente);
         }
+        
         #endregion
 
         #region Validação

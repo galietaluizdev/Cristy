@@ -15,6 +15,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<IPacienteAplicacao, PacienteAplicacao>();
 builder.Services.AddScoped<IPacienteRepositorio, PacienteRepositorio>();
 
+builder.Services.AddScoped<IDentistaAplicacao, DentistaAplicacao>();
+builder.Services.AddScoped<IDentistaRepositorio, DentistaRepositorio>();
+
+
+
 builder.Services.AddDbContext<CristyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddSwaggerGen();

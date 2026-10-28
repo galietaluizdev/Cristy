@@ -59,11 +59,11 @@ dotnet tool install --global dotnet-ef
 
 ### Funcionalidades
 
-- [ ] Cadastrar paciente
-- [ ] Listar pacientes
-- [ ] Buscar paciente por id
-- [ ] Editar paciente
-- [ ] Deletar paciente
+- [x] Cadastrar paciente
+- [x] Listar pacientes
+- [x] Buscar paciente por id
+- [x] Editar paciente
+- [x] Deletar paciente
 - [ ] Registrar consulta
 - [ ] Gerar resumo da consulta com IA
 - [ ] Validar e salvar o resumo

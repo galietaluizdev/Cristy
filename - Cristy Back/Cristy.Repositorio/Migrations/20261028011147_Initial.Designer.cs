@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cristy.Repositorio.Migrations
 {
     [DbContext(typeof(CristyContext))]
-    [Migration("20261025173749_Initial")]
+    [Migration("20261028011147_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,40 +25,62 @@ namespace Cristy.Repositorio.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Cristy.Dominio.Entidades.Paciente", b =>
+            modelBuilder.Entity("Cristy.Dominio.Entidades.Dentista", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit")
-                        .HasColumnName("Ativo");
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CRO")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("DataDeNascimento")
-                        .HasColumnType("date")
-                        .HasColumnName("Data de Nascimento");
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("Email");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Especialidade")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("Nome");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
-                        .HasColumnName("Telefone");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dentistas");
+                });
+
+            modelBuilder.Entity("Cristy.Dominio.Entidades.Paciente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateOnly>("DataDeNascimento")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
