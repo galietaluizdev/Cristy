@@ -10,6 +10,11 @@ namespace Cristy.Repositorio
         //Where T : entidadebase basicamente diz que o T que seria algo generico, herda e se torna aquela propriedade com seus campos
         protected readonly CristyContext _contexto = contexto;
 
+        public async Task<bool> ExisteAsync(int Id)
+        {
+            return await _contexto.Set<T>()
+                        .AnyAsync(e => e.Id == Id && e.Ativo);
+        }
         public async Task AtualizarAsync(T entidade)
         {
             _contexto.Set<T>().Update(entidade);
@@ -34,7 +39,7 @@ namespace Cristy.Repositorio
                         .ToListAsync();
         }
 
-        public async Task<T> ObterAsync(int id)
+        public virtual async Task<T> ObterAsync(int id)
         {
             {
                 return await _contexto.Set<T>()

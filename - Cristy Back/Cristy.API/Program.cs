@@ -18,6 +18,9 @@ builder.Services.AddScoped<IPacienteRepositorio, PacienteRepositorio>();
 builder.Services.AddScoped<IDentistaAplicacao, DentistaAplicacao>();
 builder.Services.AddScoped<IDentistaRepositorio, DentistaRepositorio>();
 
+builder.Services.AddScoped<IConsultaAplicacao, ConsultaAplicacao>();
+builder.Services.AddScoped<IConsultaRepositorio, ConsultaRepositorio>();
+
 
 
 builder.Services.AddDbContext<CristyContext>(options =>

@@ -1,10 +1,8 @@
 using Cristy.Aplicacao.Interfaces;
-using Cristy.Aplicacao.Models.Dentista.Requisicao;
-using Cristy.Aplicacao.Models.Dentista.Resposta;
-using Cristy.Aplicacao.Models.Dentista.Requisicao;
-using Cristy.Aplicacao.Models.Dentista.Resposta;
 using Cristy.Dominio.Entidades;
 using Cristy.Dominio.Interfaces;
+using Cristy.Aplicacao.Models.DentistaModel.Resposta;
+using Cristy.Aplicacao.Models.DentistaModel.Requisicao;
 
 namespace Cristy.Aplicacao;
 

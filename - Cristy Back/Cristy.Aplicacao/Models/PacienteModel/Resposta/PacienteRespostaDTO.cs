@@ -1,4 +1,4 @@
-namespace Cristy.Aplicacao.Models.Paciente.Resposta;
+namespace Cristy.Aplicacao.Models.PacienteModel.Resposta;
 
 public class PacienteRespostaDTO
 {

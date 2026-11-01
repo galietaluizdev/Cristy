@@ -1,6 +1,6 @@
-using Cristy.Aplicacao.Models.Paciente.Resposta;
+using Cristy.Aplicacao.Models.PacienteModel.Resposta;
 
-namespace Cristy.Aplicacao.Models.Dentista.Resposta;
+namespace Cristy.Aplicacao.Models.DentistaModel.Resposta;
 
 public class DentistaRespostaDTO : PacienteRespostaDTO
 {

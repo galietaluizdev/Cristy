@@ -22,6 +22,57 @@ namespace Cristy.Repositorio.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Cristy.Dominio.Entidades.Consulta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateOnly>("DataConsulta")
+                        .HasColumnType("date")
+                        .HasColumnName("Data Consulta");
+
+                    b.Property<int>("DentistaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Descricao");
+
+                    b.Property<string>("HistoricoProcessado")
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Historico");
+
+                    b.Property<string>("InformacoesRelevantes")
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Informacoes Relevantes");
+
+                    b.Property<int>("PacienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("Status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DentistaId");
+
+                    b.HasIndex("PacienteId");
+
+                    b.ToTable("Consultas", (string)null);
+                });
+
             modelBuilder.Entity("Cristy.Dominio.Entidades.Dentista", b =>
                 {
                     b.Property<int>("Id")
@@ -34,7 +85,10 @@ namespace Cristy.Repositorio.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("CRO")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("CRO");
 
                     b.Property<DateOnly>("DataDeNascimento")
                         .HasColumnType("date");
@@ -43,7 +97,9 @@ namespace Cristy.Repositorio.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Especialidade")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Especialidade");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
@@ -53,7 +109,7 @@ namespace Cristy.Repositorio.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dentistas");
+                    b.ToTable("Dentista", (string)null);
                 });
 
             modelBuilder.Entity("Cristy.Dominio.Entidades.Paciente", b =>
@@ -82,6 +138,35 @@ namespace Cristy.Repositorio.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Paciente", (string)null);
+                });
+
+            modelBuilder.Entity("Cristy.Dominio.Entidades.Consulta", b =>
+                {
+                    b.HasOne("Cristy.Dominio.Entidades.Dentista", "Dentista")
+                        .WithMany("Consultas")
+                        .HasForeignKey("DentistaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Cristy.Dominio.Entidades.Paciente", "Paciente")
+                        .WithMany("Consultas")
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Dentista");
+
+                    b.Navigation("Paciente");
+                });
+
+            modelBuilder.Entity("Cristy.Dominio.Entidades.Dentista", b =>
+                {
+                    b.Navigation("Consultas");
+                });
+
+            modelBuilder.Entity("Cristy.Dominio.Entidades.Paciente", b =>
+                {
+                    b.Navigation("Consultas");
                 });
 #pragma warning restore 612, 618
         }

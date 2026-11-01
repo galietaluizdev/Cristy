@@ -2,8 +2,8 @@
 
 using Cristy.Aplicacao;
 using Cristy.Aplicacao.Interfaces;
-using Cristy.Aplicacao.Models.Paciente.Requisicao;
-using Cristy.Aplicacao.Models.Paciente.Resposta;
+using Cristy.Aplicacao.Models.PacienteModel.Requisicao;
+using Cristy.Aplicacao.Models.PacienteModel.Resposta;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 

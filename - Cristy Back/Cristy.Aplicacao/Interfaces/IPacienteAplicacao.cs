@@ -1,5 +1,5 @@
-using Cristy.Aplicacao.Models.Paciente.Requisicao;
-using Cristy.Aplicacao.Models.Paciente.Resposta;
+using Cristy.Aplicacao.Models.PacienteModel.Requisicao;
+using Cristy.Aplicacao.Models.PacienteModel.Resposta;
 using Cristy.Dominio.Entidades;
 
 namespace Cristy.Aplicacao.Interfaces

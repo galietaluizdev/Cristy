@@ -8,5 +8,6 @@ namespace Cristy.Dominio.Interfaces
         Task<T?> ObterAsync(int id);
         Task<IEnumerable<T>> ListarAsync(bool Ativo);
         Task AtualizarAsync(T entidade);
+        Task<bool> ExisteAsync(int id);
     }
 }
