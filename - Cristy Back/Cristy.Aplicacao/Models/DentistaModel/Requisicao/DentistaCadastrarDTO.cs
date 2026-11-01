@@ -1,6 +1,6 @@
-using Cristy.Aplicacao.Models.Paciente.Requisicao;
+using Cristy.Aplicacao.Models.PacienteModel.Requisicao;
 
-namespace Cristy.Aplicacao.Models.Dentista.Requisicao
+namespace Cristy.Aplicacao.Models.DentistaModel.Requisicao
 {
     public class DentistaCadastrarDTO : PacienteCadastrarDTO
     {

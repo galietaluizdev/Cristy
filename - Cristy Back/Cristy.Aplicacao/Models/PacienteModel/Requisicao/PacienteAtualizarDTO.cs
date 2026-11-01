@@ -1,4 +1,4 @@
-namespace Cristy.Aplicacao.Models.Paciente.Requisicao
+namespace Cristy.Aplicacao.Models.PacienteModel.Requisicao
 {
     public class PacienteAtualizarDTO
     {

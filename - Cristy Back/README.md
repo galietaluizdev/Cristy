@@ -22,6 +22,16 @@ O projeto tem duas fases:
 dotnet tool install --global dotnet-ef
 ```
 
+### Banco
+
+```bash
+dotnet ef database drop --startup-project ..\Cristy.API
+y
+dotnet ef migrations remove --startup-project ..\Cristy.API
+dotnet ef migrations add Initial --startup-project ..\Cristy.API
+dotnet ef database update --startup-project ..\Cristy.API
+```
+
 ### Dependências
 
 | Projeto            | Pacote                                  |

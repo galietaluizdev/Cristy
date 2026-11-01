@@ -7,11 +7,15 @@ namespace Cristy.Repositorio.Contexto
     {
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Dentista> Dentistas { get; set; }
+        public DbSet<Consulta> Consultas { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PacienteConfigurations());
+            modelBuilder.ApplyConfiguration(new DentistaConfigurations());
+            modelBuilder.ApplyConfiguration(new ConsultaConfigurations());
         }
     }
 }

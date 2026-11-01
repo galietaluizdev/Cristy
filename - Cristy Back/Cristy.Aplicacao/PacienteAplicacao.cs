@@ -1,9 +1,7 @@
 
 using Cristy.Aplicacao.Interfaces;
-using Cristy.Aplicacao.Models.Paciente;
-// using Cristy.Aplicacao.Models.Paciente;
-using Cristy.Aplicacao.Models.Paciente.Requisicao;
-using Cristy.Aplicacao.Models.Paciente.Resposta;
+using Cristy.Aplicacao.Models.PacienteModel.Requisicao;
+using Cristy.Aplicacao.Models.PacienteModel.Resposta;
 using Cristy.Dominio.Entidades;
 using Cristy.Dominio.Interfaces;
 // using Microsoft.VisualBasic;
