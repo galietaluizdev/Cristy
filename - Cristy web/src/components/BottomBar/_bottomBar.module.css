@@ -1,0 +1,49 @@
+.bottombar_conteudo {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  height: 65px;
+  border-radius: 30px; 
+  background-color:     #3d49a5;
+  box-shadow: 0 0 15px #3a01da41;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.bottombar_corpo {
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pagina_conteudo {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+.bottombar_header {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.icone {
+  height: 24px;
+  width: auto;
+}
+
+/* .linha {
+  flex: 1;
+  border: 0;
+  border-top: 1px solid #eee;
+  margin-left: 10px;
+} */
+
+/* colocar um efeito de transição talvez? com o texto aparecendo ao lado */

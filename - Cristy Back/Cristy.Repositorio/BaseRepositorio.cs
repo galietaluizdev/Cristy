@@ -15,6 +15,7 @@ namespace Cristy.Repositorio
             return await _contexto.Set<T>()
                         .AnyAsync(e => e.Id == Id && e.Ativo);
         }
+
         public async Task AtualizarAsync(T entidade)
         {
             _contexto.Set<T>().Update(entidade);

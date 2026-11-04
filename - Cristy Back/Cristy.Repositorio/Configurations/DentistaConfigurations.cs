@@ -9,8 +9,9 @@ public class DentistaConfigurations : IEntityTypeConfiguration<Dentista>
     public void Configure(EntityTypeBuilder<Dentista> builder)
     {
         builder.ToTable("Dentista").HasKey(p => p.Id);
-        builder.Property(p => p.CRO).HasColumnName("CRO").HasMaxLength(20).IsRequired();;
-        builder.Property(p => p.Especialidade).HasColumnName("Especialidade").HasMaxLength(50);;
+        builder.Property(p => p.CRO).HasColumnName("CRO").HasMaxLength(20).IsRequired();
+        builder.HasIndex(p => p.CRO).IsUnique();
+        builder.Property(p => p.Especialidade).HasColumnName("Especialidade").HasMaxLength(50); ;
 
     }
 }

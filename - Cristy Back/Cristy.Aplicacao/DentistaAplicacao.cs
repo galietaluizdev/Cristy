@@ -22,6 +22,7 @@ public class DentistaAplicacao(IDentistaRepositorio DentistaRepositorio) : IDent
             CRO = d.CRO,
             Especialidade = d.Especialidade
         };
+         await ValidarExistencia(d.CRO.Trim() , d.Id);
         await ValidarAtualizar(validado); // se nenhuma excessão for lançada, ele faz a busca no banco
 
         var banco = await _dentistaRepositorio.ObterAsync(d.Id) ?? throw new Exception("Dentista não encontrado");
@@ -46,10 +47,10 @@ public class DentistaAplicacao(IDentistaRepositorio DentistaRepositorio) : IDent
             Email = d.Email,
             Telefone = d.Telefone,
             DataDeNascimento = d.DataDeNascimento,
-            CRO = d.CRO,
+            CRO = d.CRO.Trim(),
             Especialidade = d.Especialidade
         };
-
+        await ValidarExistencia(d.CRO.Trim(), 0);
         await ValidacaoGeral(dentista);
 
         var id = await _dentistaRepositorio.CadastrarAsync(dentista);
@@ -105,6 +106,12 @@ public class DentistaAplicacao(IDentistaRepositorio DentistaRepositorio) : IDent
 
     #region Validação
 
+    private async Task ValidarExistencia(string CRO, int Id)
+    {
+        if (await _dentistaRepositorio.CroJaCadastradoAsync(CRO, Id))
+            throw new Exception("CRO ja cadastrado");
+
+    }
     private static async Task ValidacaoGeral(Dentista d)
     {
         int anoMinimo = DateOnly.FromDateTime(DateTime.Now).Year - 120;
@@ -128,9 +135,9 @@ public class DentistaAplicacao(IDentistaRepositorio DentistaRepositorio) : IDent
         {
             throw new Exception("Data de nascimento invalida ");
         }
-        if (string.IsNullOrEmpty(d.CRO))
+        if (string.IsNullOrEmpty(d.CRO) || d.CRO.Length > 20)
         {
-            throw new Exception("CRO invalido não pode ser vazio");
+            throw new Exception("CRO invalido não pode ser vazio ou maior que 20 caracteres");
         }
         if (string.IsNullOrEmpty(d.Especialidade))
         {
