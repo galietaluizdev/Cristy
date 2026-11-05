@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
-import DentistaAPI from '../../services/DentistaAPI'
+import DentistaAPI from "../../services/DentistaAPI";
 
 export function Dentistas() {
   const [dentistas, setDentistas] = useState([]);
@@ -43,10 +43,10 @@ export function Dentistas() {
     setMostrarModal(true);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     async function buscarDentistas(ativo) {
       try {
-        const resultado = await DentistaAPI.ListarAsync(ativo)
+        const resultado = await DentistaAPI.ListarAsync(ativo);
         setDentistas(resultado);
         console.log(resultado);
       } catch (error) {
@@ -58,7 +58,6 @@ export function Dentistas() {
     buscarDentistas(true);
   }, []);
 
-
   const colunas = [
     { titulo: "Nome" },
     { titulo: "Email" },
@@ -66,8 +65,11 @@ export function Dentistas() {
     { titulo: "Nascimento" },
     { titulo: "CRO" },
     { titulo: "Especialidade" },
-    { titulo: "Ações", className: `${style.colunaAcoes} pe-5` },
+    { titulo: "Ações", className: style.colunaAcoes },
   ];
+
+  const formatarTelefone = (t) =>
+    t?.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3"); // peguei o regex na internet
 
   return (
     <BottomBar>
@@ -82,54 +84,59 @@ export function Dentistas() {
         </div>
 
         <div className={style.tabela}>
-          <Table responsive>
-            <thead className={style.tabela_cabecalho}>
-              <tr>
-                {colunas.map((coluna) => (
-                  <th key={coluna.titulo} className={coluna.className}>
-                    {coluna.titulo}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody className={style.tabela_corpo}>
-              {dentistas.length > 0 ? (
-                dentistas.map((dentista) => (
-                  <tr key={dentista.id}>
-                    <td>{dentista.nome}</td>
-                    <td>{dentista.email}</td>
-                    <td>{dentista.telefone}</td>
-                    <td>{dentista.dataDeNascimento}</td>
-                    <td>{dentista.cro}</td>
-                    <td>{dentista.especialidade}</td>
-                    <td className={`${style.colunaAcoes}  pe-2`}>
-                      <Link
-                        to="/dentista/editar"
-                        state={{ id: dentista.Id }}
-                        className={style.botao_editar}
-                      >
-                        <FaUserEdit />
-                      </Link>
-                      <Button
-                        variant=""
-                        onClick={() => handleClickDeletar(dentista)}
-                        className={style.botao_deletar}
-                      >
-                        <FaDeleteLeft />
-                      </Button>
+          <div className={style.tabela_rolagem}>
+            <Table hover  className="align-middle">
+              <thead className={style.tabela_cabecalho}>
+                <tr>
+                  {colunas.map((coluna) => (
+                    <th key={coluna.titulo} className={coluna.className}>
+                      {coluna.titulo}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className={style.tabela_corpo}>
+                {dentistas.length > 0 ? (
+                  dentistas.map((dentista) => (
+                    <tr key={dentista.id}>
+                      <td>{dentista.nome}</td>
+                      <td>{dentista.email}</td>
+                      <td>{formatarTelefone(dentista.telefone)}</td>
+                      <td>
+                        {new Date(dentista.dataDeNascimento).toLocaleDateString(
+                          "pt-BR",
+                        )}
+                      </td>
+                      <td>{dentista.cro}</td>
+                      <td>{dentista.especialidade}</td>
+                      <td className={`${style.colunaAcoes}  pe-2`}>
+                        <Link
+                          to="/dentista/editar"
+                          state={{ id: dentista.Id }}
+                          className={style.botao_editar}
+                        >
+                          <FaUserEdit />
+                        </Link>
+                        <Button
+                          variant=""
+                          onClick={() => handleClickDeletar(dentista)}
+                          className={style.botao_deletar}
+                        >
+                          <FaDeleteLeft />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={colunas.length} className="text-center">
+                      Nenhum dentista encontrado
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={colunas.length} className="text-center">
-                    Nenhum dentista encontrado
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
+                )}
+              </tbody>
+            </Table>
+          </div>
         </div>
         <Modal show={mostrarModal} onHide={handleFecharModal}>
           <ModalHeader closeButton>
