@@ -3,29 +3,18 @@
   bottom: 20px;
   left: 20px;
   right: 20px;
+  z-index: 100;
+
   max-width: 700px;
-  margin: 0 auto;
   height: 65px;
-  border-radius: 30px; 
-  background-color:     #3d49a5;
-  box-shadow: 0 0 15px #3a01da41;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
-}
 
-.bottombar_corpo {
-  display: flex;
-
-  justify-content: space-around;
-  align-items: center;
-}
-
-.pagina_conteudo {
-  width: 100%;
-  min-height: 100vh;
-  padding-bottom: 80px;
-  box-sizing: border-box;
+  border-radius: 30px;
+  background-color: #3d49a5;
+  box-shadow: 0 0 15px #3a01da41;
 }
 
 .bottombar_header {
@@ -34,16 +23,25 @@
   padding: 5px 10px;
 }
 
+.bottombar_corpo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .icone {
   height: 24px;
   width: auto;
 }
 
-/* .linha {
-  flex: 1;
-  border: 0;
-  border-top: 1px solid #eee;
-  margin-left: 10px;
-} */
+.linha_vertical {
+  height: 100%;
+  width: 1px;
+  margin: 0;
+  border: none;
+  background-color: #fff;
+}
 
-/* colocar um efeito de transição talvez? com o texto aparecendo ao lado */
+.pagina_conteudo {
+  padding-bottom: 105px; /* bottombar (65px) + margem (20px) + folga (20px) */
+}

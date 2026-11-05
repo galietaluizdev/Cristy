@@ -1,0 +1,53 @@
+.pagina_conteudo {
+  padding: 30px 50px;
+}
+
+.pagina_cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & .botao_novo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 20px;
+    border-radius: 10px;
+
+    font-family: sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    background-color: #5103cf;
+  }
+}
+
+.tabela {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 30px;
+}
+
+.tabela_corpo svg {
+  margin: 5px;
+  font-size: 25px;
+  color: #212529;
+}
+
+th.colunaAcoes,
+td.colunaAcoes {
+  text-align: end;
+}
+
+.botao_editar svg:hover {
+  color: #f08330;
+}
+
+.botao_deletar {
+  border: none;
+  background: none;
+
+  & svg:hover {
+    color: #e4504b;
+  }
+}

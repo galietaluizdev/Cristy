@@ -8,16 +8,16 @@ export function BottomBar({ children }) {
       <div className={style.bottombar_conteudo}>
 
         <div className={style.bottombar_corpo}>
-          <BottomBarItem
+          <BottomBarItem 
             link={"/pacientes"}
             logo={<MdPeopleAlt/>}
           />
-          <BottomBarItem
-            link={"/pacientes"}
+          <BottomBarItem 
+            link={"/dentistas"}
             logo={<RiToothFill/>}
           />
-          <BottomBarItem
-            link={"/pacientes"}
+          <BottomBarItem 
+            link={"/consultas"}
             logo={<RiBookAiLine/>}
           />
         </div>
