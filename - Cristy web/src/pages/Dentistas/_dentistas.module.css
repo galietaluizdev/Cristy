@@ -31,7 +31,8 @@
 .tabela {
   margin: 2% 3% 0;
   padding: 20px;
-  border: 3px groove #000000;
+  box-shadow: 0 0 15px #3a01da41;
+  border-radius: 2em;
 }
 
 .tabela_rolagem {
