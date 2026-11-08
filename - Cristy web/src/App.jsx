@@ -4,6 +4,7 @@ import "./App.css";
 import { Pacientes } from "./pages/Pacientes/Pacientes";
 import { Dentistas } from "./pages/Dentistas/Dentistas";
 import { Consultas } from "./pages/Consultas/Consultas";
+import { ConsultaDetalhada } from "./pages/Consultas/ConsultaDetalhada/ConsultaDetalhada";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/pacientes" element={<Pacientes />} />
         <Route path="/dentistas" element={<Dentistas />} />
         <Route path="/consultas" element={<Consultas />} />
+        <Route path="/consulta/detalhes" element={<ConsultaDetalhada />} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,6 +2,7 @@ using Cristy.Aplicacao.Interfaces;
 using Cristy.Aplicacao.Models.Consulta.Requisicao;
 using Cristy.Aplicacao.Models.Consulta.Resposta;
 using Cristy.Dominio.Entidades;
+using Cristy.Dominio.Enumeradores;
 using Cristy.Dominio.Interfaces;
 
 namespace Cristy.Aplicacao;
@@ -27,7 +28,7 @@ public class ConsultaAplicacao(
             DentistaId = d.DentistaId,
             PacienteNome = d.Paciente.Nome,
             DentistaNome = d.Dentista.Nome,
-            Status = d.Status
+            Status = d.Status.ToString()
         }).ToList();
 
         return resposta;
@@ -84,7 +85,7 @@ public class ConsultaAplicacao(
             Descricao = d.Descricao,
             HistoricoProcessado = d.HistoricoProcessado,
             InformacoesRelevantes = d.InformacoesRelevantes,
-            Status = d.Status,
+            Status = d.Status.ToString(),
             Ativo = d.Ativo
         };
         return resposta;

@@ -1,0 +1,113 @@
+.pagina_conteudo {
+  padding: 30px 50px 50px;
+}
+
+.pagina_cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & .botao_novo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 20px;
+    border-radius: 10px;
+
+    font-family: sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    background-color: #5570c4;
+    &:hover {
+      background-color: #5103cf;
+    }
+  }
+}
+.pagina_cabecalho h3 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #5103cf;
+}
+
+.tabela {
+  margin: 2% 3% 0;
+  padding: 20px;
+  box-shadow: 0 0 15px #3a01da41;
+  border-radius: 2em;
+}
+
+.tabela_rolagem {
+  max-height: 59vh;
+  overflow: auto;
+  padding: 0;
+}
+.tabela table {
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.tabela table thead {
+  position: sticky;
+  top: -1px;
+  z-index: 1;
+  background-color: #fff;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #5103cf;
+  text-align: start;
+  padding: 12px 10px;
+}
+.tabela table td {
+  font-size: 15px;
+  color: #333;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+.tabela_corpo svg {
+  margin: 5px;
+  font-size: 25px;
+  color: #212529;
+}
+.tabela table tbody tr:hover td {
+  background-color: #f6f0ff;
+}
+
+th.colunaAcoes,
+td.colunaAcoes {
+  text-align: end;
+  padding-right: 2.5em;
+}
+
+.botao_editar {
+  border: none;
+  background: none;
+
+  & svg:hover {
+    color: #007ccf;
+  }
+}
+
+.botao_deletar {
+  border: none;
+  background: none;
+
+  & svg:hover {
+    color: #f50800;
+  }
+}
+@media screen and (max-height: 900px) {
+  .tabela_rolagem {
+    max-height: 50vh;
+  }
+}
+@media screen and (max-height: 730px) {
+  .tabela_rolagem {
+    max-height: 40vh;
+  }
+}

@@ -15,6 +15,6 @@ public class ConsultaRespostaDTO
     public string Descricao { get; set; } // dentista
     public string? HistoricoProcessado { get; set; } // IA retorna
     public string? InformacoesRelevantes { get; set; } // IA retorna 
-    public StatusConsulta Status { get; set; } // sistema
+    public string Status { get; set; } // sistema
     public bool Ativo { get; set; }
 }
