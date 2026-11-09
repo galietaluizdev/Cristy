@@ -116,7 +116,7 @@ export function Pacientes() {
                       <td className={`${style.colunaAcoes}  pe-2`}>
                         <Link
                           to="/paciente/editar"
-                          state={{ id: paciente.Id }}
+                          state={{ id: paciente.id }}
                           className={style.botao_editar}
                         >
                           <FaUserEdit />
