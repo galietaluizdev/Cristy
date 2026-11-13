@@ -24,7 +24,7 @@ export function Pacientes() {
 
   const handleDeletar = async () => {
     try {
-      await PacienteAPI.DefinirSituacaoAsync(pacienteSelecionado.Id);
+      await PacienteAPI.DefinirSituacaoAsync(pacienteSelecionado.Id, false);
       setPacientes(pacientes.filter((u) => u.Id !== pacienteSelecionado.Id));
     } catch (error) {
       console.error("Erro ao  deletar paciente: ", error);
@@ -106,11 +106,14 @@ export function Pacientes() {
                         {paciente.email.length > 30
                           ? paciente.email.slice(0, 30) + "..."
                           : paciente.email}
-                      </td>{" "}
+                      </td>
                       <td>{formatarTelefone(paciente.telefone)}</td>
                       <td>
                         {new Date(paciente.dataDeNascimento).toLocaleDateString(
                           "pt-BR",
+                          {
+                            timeZone: "UTC",
+                          },
                         )}
                       </td>
                       <td className={`${style.colunaAcoes}  pe-2`}>

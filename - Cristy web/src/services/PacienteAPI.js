@@ -24,5 +24,14 @@ const PacienteAPI = {
       console.error("Erro ao buscar paciente:", error);
     }
   },
+  async DefinirSituacaoAsync(Id , Ativo){
+    try {
+      console.log(Id)
+      await HTTPClient.put(`/DefinirSituacao/${Id}?Ativo=${Ativo}`)
+    } catch (error) {
+      console.error("Erro ao definir sitação do paciente:", error);
+      throw error;
+    }
+  }
 };
 export default PacienteAPI;
