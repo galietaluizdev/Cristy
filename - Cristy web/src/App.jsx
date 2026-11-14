@@ -6,6 +6,9 @@ import { Dentistas } from "./pages/Dentistas/Dentistas";
 import { Consultas } from "./pages/Consultas/Consultas";
 import { ConsultaDetalhada } from "./pages/Consultas/ConsultaDetalhada/ConsultaDetalhada";
 import { PacienteEditar } from "./pages/Pacientes/PacienteEditar/PacienteEditar";
+import { DentistaEditar } from "./pages/Dentistas/DentistaEditar/DentistaEditar";
+import { ConsultaEditar } from "./pages/Consultas/ConsultaEditar/ConsultaEditar";
+import { PacienteNovo } from "./pages/Pacientes/PacienteNovo/PacienteNovo";
 
 function App() {
   return (
@@ -14,9 +17,16 @@ function App() {
         {/* <Route path="/" element={}/> */}
         <Route path="/pacientes" element={<Pacientes />} />
         <Route path="/paciente/editar" element={<PacienteEditar />} />
+        <Route path="/paciente/novo" element={<PacienteNovo />} />
+
         <Route path="/dentistas" element={<Dentistas />} />
+        <Route path="/dentista/editar" element={<DentistaEditar />} />
+        
         <Route path="/consultas" element={<Consultas />} />
         <Route path="/consulta/detalhes" element={<ConsultaDetalhada />} />
+        <Route path="/consulta/editar" element={<ConsultaEditar />} />
+
+
       </Routes>
     </BrowserRouter>
   );

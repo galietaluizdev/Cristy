@@ -14,7 +14,10 @@ const PacienteAPI = {
     try {
       console.log(paciente)
       await HTTPClient.put(`/Paciente/Atualizar`,paciente);
-    } catch (error) {}
+    } catch (error) {
+            console.error("Erro ao atualizar paciente: ", error);
+      throw error;
+    }
   },
   async BuscarAsync(id) {
     try {
@@ -27,7 +30,7 @@ const PacienteAPI = {
   async DefinirSituacaoAsync(Id , Ativo){
     try {
       console.log(Id)
-      await HTTPClient.put(`/DefinirSituacao/${Id}?Ativo=${Ativo}`)
+      await HTTPClient.put(`Paciente/DefinirSituacao/${Id}?Ativo=${Ativo}`)
     } catch (error) {
       console.error("Erro ao definir sitação do paciente:", error);
       throw error;

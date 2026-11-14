@@ -24,7 +24,7 @@ export function ConsultaDetalhada() {
   useEffect(() => {
     async function BuscarConsulta(Id) {
       try {
-        const consultaEncontrada = await ConsultaAPI.BuscarPorId(Id);
+        const consultaEncontrada = await ConsultaAPI.BuscarPorIdAsync(Id);
         setConsultaExibir(consultaEncontrada);
       } catch (error) {
         console.error("Erro ao carregar consulta:", error);

@@ -21,11 +21,10 @@ export function Dentistas() {
   const [dentistaSelecionado, setDentistaSelecionado] = useState("");
 
   const [mostrarModal, setMostrarModal] = useState(false);
-
   const handleDeletar = async () => {
     try {
-      await DentistaAPI.DefinirSituacaoAsync(dentistaSelecionado.Id);
-      setDentistas(dentistas.filter((u) => u.Id !== dentistaSelecionado.Id));
+      await DentistaAPI.DefinirSituacaoAsync(dentistaSelecionado.id , false);
+      setDentistas(dentistas.filter((u) => u.id !== dentistaSelecionado.id));
     } catch (error) {
       console.error("Erro ao  deletar dentista: ", error);
     } finally {
@@ -99,12 +98,23 @@ export function Dentistas() {
                 {dentistas.length > 0 ? (
                   dentistas.map((dentista) => (
                     <tr key={dentista.id}>
-                      <td>{dentista.nome}</td>
-                      <td>{dentista.email}</td>
+                      <td>
+                        {dentista.nome.length > 30
+                          ? dentista.nome.slice(0, 30) + "..."
+                          : dentista.nome}
+                      </td>
+                      <td>
+                        {dentista.email.length > 30
+                          ? dentista.email.slice(0, 30) + "..."
+                          : dentista.email}
+                      </td>
                       <td>{formatarTelefone(dentista.telefone)}</td>
                       <td>
                         {new Date(dentista.dataDeNascimento).toLocaleDateString(
                           "pt-BR",
+                          {
+                            timeZone: "UTC",
+                          },                          
                         )}
                       </td>
                       <td>{dentista.cro}</td>
@@ -112,7 +122,7 @@ export function Dentistas() {
                       <td className={`${style.colunaAcoes}  pe-2`}>
                         <Link
                           to="/dentista/editar"
-                          state={{ id: dentista.Id }}
+                          state={{ id: dentista.id }}
                           className={style.botao_editar}
                         >
                           <FaUserEdit />

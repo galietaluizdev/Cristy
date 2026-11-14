@@ -20,7 +20,7 @@ export function PacienteEditar() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [dataDeNascimento, setDataNascimento] = useState("");
+  const [dataDeNascimento, setDataDeNascimento] = useState("");
 
   const handleCancelar = () => {
     navigate("/pacientes");
@@ -34,7 +34,7 @@ export function PacienteEditar() {
         let paciente = { id, nome, email, telefone, dataDeNascimento };
         await PacienteAPI.AtualizarAsync(paciente);
         navigate("/pacientes");
-        }
+      }
     } catch (error) {
       console.error("Erro ao atualizar:", error);
     } finally {
@@ -64,7 +64,7 @@ export function PacienteEditar() {
   }, [id]);
 
   const isFormValid = () => {
-    return nome.length < 100 && email.length < 100 & telefone.length == 11;
+    return nome.length < 100 && (email.length < 100) & (telefone.length == 11);
   };
 
   return (
@@ -92,6 +92,9 @@ export function PacienteEditar() {
                     autoFocus
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o nome completo do paciente
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formEmail" className="mb-3">
                   <Form.Label>Email</Form.Label>
@@ -105,12 +108,15 @@ export function PacienteEditar() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o email do paciente
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formTelefone" className="mb-3">
                   <Form.Label>Telefone</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder=" ( ) _ ____-____  Insira o numero de telefone"
+                    placeholder=" ( ) _ ____-____"
                     name="telefone"
                     className={style.input}
                     value={telefone}
@@ -118,6 +124,9 @@ export function PacienteEditar() {
                     onChange={(e) => setTelefone(e.target.value)}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o telefone do paciente
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formDataNascimento" className="mb-3">
                   <Form.Label>Data de Nascimento</Form.Label>
@@ -128,9 +137,12 @@ export function PacienteEditar() {
                     className={style.input}
                     value={dataDeNascimento}
                     disabled={salvando}
-                    onChange={(e) => setDataNascimento(e.target.value)}
+                    onChange={(e) => setDataDeNascimento(e.target.value)}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira data de nascimento do paciente
+                  </Form.Text>
                 </Form.Group>
               </div>
 

@@ -10,7 +10,16 @@ const ConsultaAPI = {
       throw error;
     }
   },
-  async BuscarPorId(Id) {
+  async AtualizarAsync(consulta) {
+    try {
+      console.log(consulta);
+      await HTTPClient.put(`/Consulta/Atualizar`, consulta);
+    } catch (error) {
+      console.error("Erro ao atualizar consulta: ", error);
+      throw error;
+    }
+  },
+  async BuscarPorIdAsync(Id) {
     try {
       const response = await HTTPClient.get(`/Consulta/Obter/${Id}`);
       return response.data;

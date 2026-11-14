@@ -21,11 +21,10 @@ export function Pacientes() {
   const [pacienteSelecionado, setPacienteSelecionado] = useState("");
 
   const [mostrarModal, setMostrarModal] = useState(false);
-
   const handleDeletar = async () => {
     try {
-      await PacienteAPI.DefinirSituacaoAsync(pacienteSelecionado.Id, false);
-      setPacientes(pacientes.filter((u) => u.Id !== pacienteSelecionado.Id));
+      await PacienteAPI.DefinirSituacaoAsync(pacienteSelecionado.id, false);
+      setPacientes(pacientes.filter((u) => u.id !== pacienteSelecionado.id));
     } catch (error) {
       console.error("Erro ao  deletar paciente: ", error);
     } finally {
@@ -151,7 +150,12 @@ export function Pacientes() {
           </ModalHeader>
           <ModalBody>
             Tem certeza que deseja excluir o paciente{" "}
-            {pacienteSelecionado?.nome}?
+            <strong>
+              {pacienteSelecionado?.nome?.length > 30
+                ? pacienteSelecionado?.nome?.slice(0, 30) + "..."
+                : pacienteSelecionado?.nome}
+              ?
+            </strong>
           </ModalBody>
           <ModalFooter>
             <Button variant="secondary" onClick={handleFecharModal}>

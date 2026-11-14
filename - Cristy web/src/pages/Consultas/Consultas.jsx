@@ -3,7 +3,15 @@ import { BottomBar } from "../../components/BottomBar/BottomBar";
 import { TopBar } from "../../components/TopBar/TopBar";
 import style from "./_consultas.module.css";
 import { useEffect, useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle, Table } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  Table,
+} from "react-bootstrap";
 import ConsultaAPI from "../../services/ConsultaAPI";
 import { FaClipboardList, FaDeleteLeft } from "react-icons/fa6";
 import { FaUserEdit } from "react-icons/fa";
@@ -16,8 +24,8 @@ export function Consultas() {
 
   const handleDeletar = async () => {
     try {
-      await ConsultaAPI.DefinirSituacaoAsync(consultaSelecionado.Id);
-      setConsultas(consultas.filter((u) => u.Id !== consultaSelecionado.Id));
+      await ConsultaAPI.DefinirSituacaoAsync(consultaSelecionado.id);
+      setConsultas(consultas.filter((u) => u.id !== consultaSelecionado.id));
     } catch (error) {
       console.error("Erro ao  deletar consulta: ", error);
     } finally {
@@ -26,8 +34,8 @@ export function Consultas() {
   };
 
   const handleFecharModal = () => {
-    setMostrarModal(false);
     setConsultaSelecionado(null);
+    setMostrarModal(false);
   };
 
   const handleClickDeletar = (consulta) => {
@@ -85,11 +93,22 @@ export function Consultas() {
                 {consultas.length > 0 ? (
                   consultas.map((consulta) => (
                     <tr key={consulta.id}>
-                      <td>{consulta.pacienteNome}</td>
-                      <td>{consulta.dentistaNome}</td>
+                      <td>
+                        {consulta.pacienteNome.length > 30
+                          ? consulta.pacienteNome.slice(0, 30) + "..."
+                          : consulta.pacienteNome}
+                      </td>
+                      <td>
+                        {consulta.dentistaNome.length > 30
+                          ? consulta.dentistaNome.slice(0, 30) + "..."
+                          : consulta.dentistaNome}
+                      </td>
                       <td>
                         {new Date(consulta.dataConsulta).toLocaleDateString(
                           "pt-BR",
+                          {
+                            timeZone: "UTC",
+                          },
                         )}
                       </td>
                       <td>{consulta.status}</td>
@@ -103,7 +122,7 @@ export function Consultas() {
                         </Link>
                         <Link
                           to="/consulta/editar"
-                          state={{ id: consulta.Id }}
+                          state={{ id: consulta.id }}
                           className={style.botao_editar}
                         >
                           <FaUserEdit />
@@ -134,9 +153,13 @@ export function Consultas() {
             <ModalTitle>Confirmar Exclusão</ModalTitle>
           </ModalHeader>
           <ModalBody>
-            Tem certeza que deseja excluir o consulta{" "}
-            {consultaSelecionado?.nome}?
-          </ModalBody>
+            Tem certeza que deseja excluir a consulta{" "}
+            <strong>
+              {consultaSelecionado?.nome?.length > 30
+                ? consultaSelecionado?.nome?.slice(0, 30) + "..."
+                : consultaSelecionado?.nome}
+              ?
+            </strong>          </ModalBody>
           <ModalFooter>
             <Button variant="secondary" onClick={handleFecharModal}>
               Cancelar
