@@ -51,7 +51,7 @@ export function PacienteEditar() {
           setNome(paciente.nome);
           setEmail(paciente.email);
           setTelefone(paciente.telefone);
-          setDataNascimento(paciente.dataDeNascimento);
+          setDataDeNascimento(paciente.dataDeNascimento);
           console.log(paciente);
         }
       } catch (error) {
@@ -64,7 +64,12 @@ export function PacienteEditar() {
   }, [id]);
 
   const isFormValid = () => {
-    return nome.length < 100 && (email.length < 100) & (telefone.length == 11);
+    return (
+      nome.length < 100 &&
+      email.length < 100 &&
+      telefone.length == 11 &&
+      dataDeNascimento
+    );
   };
 
   return (
@@ -83,7 +88,7 @@ export function PacienteEditar() {
                   <Form.Label className={style.label}>Nome</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Insira o Nome de Paciente"
+                    placeholder="Nome Sobrenome"
                     name="nome"
                     className={style.input}
                     value={nome}
@@ -96,11 +101,12 @@ export function PacienteEditar() {
                     Insira o nome completo do paciente
                   </Form.Text>
                 </Form.Group>
+
                 <Form.Group controlId="formEmail" className="mb-3">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Insira o email"
+                    placeholder="paciente@email.com"
                     name="email"
                     className={style.input}
                     value={email}
@@ -112,11 +118,13 @@ export function PacienteEditar() {
                     Insira o email do paciente
                   </Form.Text>
                 </Form.Group>
+
                 <Form.Group controlId="formTelefone" className="mb-3">
                   <Form.Label>Telefone</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder=" ( ) _ ____-____"
+                    placeholder=" (35) 9 9999-9999"
+                    maxLength={11}
                     name="telefone"
                     className={style.input}
                     value={telefone}
@@ -132,7 +140,6 @@ export function PacienteEditar() {
                   <Form.Label>Data de Nascimento</Form.Label>
                   <Form.Control
                     type="date"
-                    placeholder="Insira a data de nascimento"
                     name="dataDeNascimento"
                     className={style.input}
                     value={dataDeNascimento}

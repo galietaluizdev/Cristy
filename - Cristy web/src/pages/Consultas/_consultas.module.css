@@ -3,14 +3,16 @@
 }
 
 .pagina_cabecalho {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr;
+  
   align-items: center;
   & .botao_novo {
     display: flex;
     align-items: center;
     gap: 8px;
-
+    grid-column: 3;
+    justify-self: end;
     padding: 10px 20px;
     border-radius: 10px;
 
@@ -24,13 +26,16 @@
     }
   }
 }
-.pagina_cabecalho h3 {
+.pagina_cabecalho h1 {
+  align-content: center;
   margin: 0;
+  text-align: center;
+  grid-column: 2;
   font-size: 28px;
   font-weight: 700;
-  color: #5103cf;
-}
+  color: #070707;
 
+}
 .tabela {
   margin: 2% 3% 0;
   padding: 20px;

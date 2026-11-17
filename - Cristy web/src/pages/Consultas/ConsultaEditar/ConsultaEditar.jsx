@@ -50,7 +50,7 @@ export function ConsultaEditar() {
           dataConsulta,
           descricao,
         };
-        await ConsultaAPI.AtualizarAsync(consulta);
+        await ConsultaAPI.AtualizarAsync({id, dataConsulta, descricao});
         navigate("/consultas");
       }
     } catch (error) {

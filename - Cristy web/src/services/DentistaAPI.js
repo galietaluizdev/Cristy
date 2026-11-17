@@ -10,10 +10,26 @@ const DentistaAPI = {
       throw error;
     }
   },
-  async AtualizarAsync(dentista) {
+  async AtualizarAsync({
+    id,
+    nome,
+    email,
+    telefone,
+    dataDeNascimento,
+    cro,
+    especialidade,
+  }) {
     try {
-      console.log(dentista);
-      await HTTPClient.put(`/Dentista/Atualizar`, dentista);
+      const envelope = {
+        id: id,
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        dataDeNascimento: dataDeNascimento,
+        cro: cro,
+        especialidade: especialidade,
+      };
+      await HTTPClient.put(`/Dentista/Atualizar`, envelope);
     } catch (error) {
       console.error("Erro ao atualizar dentista: ", error);
       throw error;
@@ -27,14 +43,37 @@ const DentistaAPI = {
       console.error("Erro ao buscar dentista:", error);
     }
   },
-    async DefinirSituacaoAsync(Id , Ativo){
+  async DefinirSituacaoAsync(Id, Ativo) {
     try {
-      console.log(Id)
-      await HTTPClient.put(`Dentista/DefinirSituacao/${Id}?Ativo=${Ativo}`)
+      console.log(Id);
+      await HTTPClient.put(`Dentista/DefinirSituacao/${Id}?Ativo=${Ativo}`);
     } catch (error) {
       console.error("Erro ao definir situação do dentista:", error);
       throw error;
     }
-  }
+  },
+  async CadastrarAsync({
+    nome,
+    email,
+    telefone,
+    dataDeNascimento,
+    cro,
+    especialidade,
+  }) {
+    try {
+      const envelope = {
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        dataDeNascimento: dataDeNascimento,
+        cro: cro,
+        especialidade: especialidade,
+      };
+      await HTTPClient.post(`/Dentista/Cadastrar/`, envelope);
+    } catch (error) {
+      console.error("Erro ao cadastrar dentista: ", error);
+      throw error;
+    }
+  },
 };
 export default DentistaAPI;

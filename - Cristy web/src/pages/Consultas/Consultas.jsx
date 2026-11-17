@@ -24,7 +24,8 @@ export function Consultas() {
 
   const handleDeletar = async () => {
     try {
-      await ConsultaAPI.DefinirSituacaoAsync(consultaSelecionado.id);
+      console.log("id: " , consultaSelecionado.id)
+      await ConsultaAPI.DefinirSituacaoAsync(consultaSelecionado.id, false);
       setConsultas(consultas.filter((u) => u.id !== consultaSelecionado.id));
     } catch (error) {
       console.error("Erro ao  deletar consulta: ", error);

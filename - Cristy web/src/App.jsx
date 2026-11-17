@@ -9,6 +9,8 @@ import { PacienteEditar } from "./pages/Pacientes/PacienteEditar/PacienteEditar"
 import { DentistaEditar } from "./pages/Dentistas/DentistaEditar/DentistaEditar";
 import { ConsultaEditar } from "./pages/Consultas/ConsultaEditar/ConsultaEditar";
 import { PacienteNovo } from "./pages/Pacientes/PacienteNovo/PacienteNovo";
+import { DentistaNovo } from "./pages/Dentistas/DentistaNovo/DentistaNovo";
+import { ConsultaNovo } from "./pages/Consultas/ConsultaNovo/ConsultaNovo";
 
 function App() {
   return (
@@ -21,10 +23,12 @@ function App() {
 
         <Route path="/dentistas" element={<Dentistas />} />
         <Route path="/dentista/editar" element={<DentistaEditar />} />
+        <Route path="/dentista/novo" element={<DentistaNovo />} />
         
         <Route path="/consultas" element={<Consultas />} />
         <Route path="/consulta/detalhes" element={<ConsultaDetalhada />} />
         <Route path="/consulta/editar" element={<ConsultaEditar />} />
+        <Route path="/consulta/novo" element={<ConsultaNovo />} />
 
 
       </Routes>

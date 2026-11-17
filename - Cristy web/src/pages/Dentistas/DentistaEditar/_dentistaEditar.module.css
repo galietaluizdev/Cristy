@@ -4,10 +4,9 @@
 }
 
 .cabecalho {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1%;
 }
 
 .titulo {
@@ -24,7 +23,7 @@
   margin: 5%;
   margin-top: 0%;
   margin-bottom: 0%;
-
+    
   padding: 2.5%;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -85,10 +84,19 @@
     border-color 0.4s ease,
     box-shadow 0.4s ease;
 }
-.carregando {
-    width: 100%;
-    padding: 40px;
-    text-align: center;
-    color: #6c757d;
-    font-size: 15px;
+.orientacao {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #ff020262;
+  padding: 10px;  
 }
+
+.carregando {
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+

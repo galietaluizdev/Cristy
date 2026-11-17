@@ -4,6 +4,7 @@ import { BottomBar } from "../../../components/BottomBar/BottomBar";
 import { useState } from "react";
 import { TopBar } from "../../../components/TopBar/TopBar";
 import { Button, Form } from "react-bootstrap";
+import PacienteAPI from "../../../services/PacienteAPI";
 
 export function PacienteNovo() {
   const [nome, setNome] = useState(``);
@@ -16,28 +17,17 @@ export function PacienteNovo() {
   const navigate = useNavigate();
 
   const isFormValid = async () => {
-  const isFormValid = () => {
     return nome.length < 100 && (email.length < 100) & (telefone.length == 11);
-  };  };
+  };
 
   const handleSubmit = async (e) => {
     try {
       setSalvando(true);
       e.preventDefault();
       if (isFormValid()) {
-        const objeto = {
-          nome: nome,
-          usuarioId: responsavel,
-          historiaId: historia,
-          sprintId: sprint,
-        };
-        console.log(objeto);
-        console.log(sprint.value);
-        await tarefaAPI.CriarAsync(objeto);
-        navigate("/tarefas");
-      } else {
-        alert("Preencha todos os campos");
-      }
+        await PacienteAPI.CadastrarAsync({nome, email, telefone, dataDeNascimento});
+        navigate("/pacientes");
+      } 
     } catch (error) {
       console.error("Erro ao criar tarefa: ", error);
     } finally {
@@ -84,14 +74,13 @@ export function PacienteNovo() {
                 <Form.Control
                   type="text"
                   className={style.input}
-                  placeholder="usuario@email.com"
+                  placeholder="paciente@email.com"
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={salvando}
-                  autoFocus
-                />
+                  />
                 <Form.Text className={style.orientacao}>
                   Insira o email do paciente
                 </Form.Text>
@@ -110,8 +99,7 @@ export function PacienteNovo() {
                   onChange={(e) => setTelefone(e.target.value)}
                   required
                   disabled={salvando}
-                  autoFocus
-                />
+                  />
                 <Form.Text className={style.orientacao}>
                   Insira o telefone do paciente
                 </Form.Text>
@@ -127,7 +115,7 @@ export function PacienteNovo() {
                   disabled={salvando}
                   onChange={(e) => setDataDeNascimento(e.target.value)}
                   required
-                />
+                  />
                 <Form.Text className={style.orientacao}>
                   Insira data de nascimento do paciente
                 </Form.Text>

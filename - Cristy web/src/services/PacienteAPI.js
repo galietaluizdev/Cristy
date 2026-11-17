@@ -10,12 +10,18 @@ const PacienteAPI = {
       throw error;
     }
   },
-  async AtualizarAsync(paciente) {
+  async AtualizarAsync({id, nome, email, telefone, dataDeNascimento}) {
     try {
-      console.log(paciente)
-      await HTTPClient.put(`/Paciente/Atualizar`,paciente);
+      const envelope = {
+        id: id,
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        dataDeNascimento: dataDeNascimento
+      }
+      await HTTPClient.put(`/Paciente/Atualizar/`, envelope);
     } catch (error) {
-            console.error("Erro ao atualizar paciente: ", error);
+      console.error("Erro ao atualizar paciente: ", error);
       throw error;
     }
   },
@@ -27,14 +33,28 @@ const PacienteAPI = {
       console.error("Erro ao buscar paciente:", error);
     }
   },
-  async DefinirSituacaoAsync(Id , Ativo){
+  async DefinirSituacaoAsync(Id, Ativo) {
     try {
-      console.log(Id)
-      await HTTPClient.put(`Paciente/DefinirSituacao/${Id}?Ativo=${Ativo}`)
+      console.log(Id);
+      await HTTPClient.put(`Paciente/DefinirSituacao/${Id}?Ativo=${Ativo}`);
     } catch (error) {
       console.error("Erro ao definir sitação do paciente:", error);
       throw error;
     }
-  }
+  },
+  async CadastrarAsync({ nome, email, telefone, dataDeNascimento }) {
+    try {
+      const envelope = {
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        dataDeNascimento: dataDeNascimento,
+      };
+      await HTTPClient.post(`/Paciente/Cadastrar/`, envelope);
+    } catch (error) {
+      console.error("Erro ao cadastrar paciente: ", error);
+      throw error;
+    }
+  },
 };
 export default PacienteAPI;

@@ -7,7 +7,6 @@ import { Button, Form } from "react-bootstrap";
 import { TopBar } from "../../../components/TopBar/TopBar";
 
 import { BottomBar } from "../../../components/BottomBar/BottomBar";
-import PacienteAPI from "../../../services/PacienteAPI";
 import DentistaAPI from "../../../services/DentistaAPI";
 
 export function DentistaEditar() {
@@ -34,7 +33,7 @@ export function DentistaEditar() {
     try {
       if (isFormValid()) {
         setSalvando(true);
-        let dentista = {
+        await DentistaAPI.AtualizarAsync({
           id,
           nome,
           email,
@@ -42,8 +41,7 @@ export function DentistaEditar() {
           dataDeNascimento,
           cro,
           especialidade,
-        };
-        await DentistaAPI.AtualizarAsync(dentista);
+        });
         navigate("/dentistas");
       }
     } catch (error) {
@@ -54,7 +52,7 @@ export function DentistaEditar() {
   };
 
   useEffect(() => {
-    async function CarregarPaciente(Id) {
+    async function CarregarDentista(Id) {
       try {
         setCarregando(true);
         console.log(location.state);
@@ -74,16 +72,35 @@ export function DentistaEditar() {
         setCarregando(false);
       }
     }
-    CarregarPaciente(id);
+    CarregarDentista(id);
   }, [id]);
+
+  const regexCRO =
+    /^CRO[-\s/]?(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)[-\s]?\d{3,6}$/i; // peguei o regex da internet
+  function validarFormatoCRO(valor) {
+    return regexCRO.test(valor.trim());
+  }
+  const handleCroChange = (e) => {
+    const limpo = e.target.value
+      .toUpperCase()
+      .replace(/^CRO/, "")
+      .replace(/[^A-Z0-9]/g, "");
+
+    const uf = limpo.replace(/[^A-Z]/g, "").slice(0, 2);
+    const num = limpo.replace(/[^0-9]/g, "").slice(0, 6);
+
+    const formatado = uf ? `CRO-${uf}${num ? " " + num : ""}` : "";
+    setCro(formatado);
+  };
 
   const isFormValid = () => {
     return (
       nome.length < 100 &&
-      (email.length < 100) &
-        (telefone.length == 11) &
-        (cro.length < 20) &
-        (especialidade.length < 50)
+      email.length < 100 &&
+      telefone.length == 11 &&
+      cro.length < 20 &&
+      validarFormatoCRO(cro) &&
+      especialidade.length < 50
     );
   };
 
@@ -103,7 +120,7 @@ export function DentistaEditar() {
                   <Form.Label className={style.label}>Nome</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Insira o Nome de Paciente"
+                    placeholder="Nome Sobrenome"
                     name="nome"
                     className={style.input}
                     value={nome}
@@ -112,12 +129,16 @@ export function DentistaEditar() {
                     autoFocus
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o nome completo do dentista
+                  </Form.Text>
                 </Form.Group>
+
                 <Form.Group controlId="formEmail" className="mb-3">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Insira o email"
+                    placeholder="dentista@email.com"
                     name="email"
                     className={style.input}
                     value={email}
@@ -125,12 +146,17 @@ export function DentistaEditar() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o email do dentista
+                  </Form.Text>
                 </Form.Group>
+
                 <Form.Group controlId="formTelefone" className="mb-3">
                   <Form.Label>Telefone</Form.Label>
                   <Form.Control
                     type="tel"
-                    placeholder=" ( ) _ ____-____  Insira o numero de telefone"
+                    placeholder=" (35) 9 9999-9999"
+                    maxLength={11}
                     name="telefone"
                     className={style.input}
                     value={telefone}
@@ -138,12 +164,15 @@ export function DentistaEditar() {
                     onChange={(e) => setTelefone(e.target.value)}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o telefone do dentista
+                  </Form.Text>
                 </Form.Group>
+
                 <Form.Group controlId="formDataNascimento" className="mb-3">
                   <Form.Label>Data de Nascimento</Form.Label>
                   <Form.Control
                     type="date"
-                    placeholder="Insira a data de nascimento"
                     name="dataDeNascimento"
                     className={style.input}
                     value={dataDeNascimento}
@@ -151,19 +180,44 @@ export function DentistaEditar() {
                     onChange={(e) => setDataNascimento(e.target.value)}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o data de nascimento do dentista
+                  </Form.Text>
                 </Form.Group>
+
                 <Form.Group controlId="formCro" className="mb-3">
                   <Form.Label>Conselho Regional de Odontologia</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Insira seu codigo do CRO"
-                    name="Cro"
+                    placeholder="CRO-UF 123456"
+                    name="cro"
                     className={style.input}
                     value={cro}
                     disabled={salvando}
-                    onChange={(e) => setCro(e.target.value)}
+                    onChange={handleCroChange}
                     required
                   />
+                  <Form.Text className={style.orientacao}>
+                    Insira o CRO do dentista (Lembre-se que isto é um documento,
+                    confira antes de inserir)
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group controlId="formEspecialidade" className="mb-3">
+                  <Form.Label>Especialidade</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Ex: Bucomaxilo"
+                    name="especialidade"
+                    className={style.input}
+                    value={especialidade}
+                    disabled={salvando}
+                    onChange={(e) => setEspecialidade(e.target.value)}
+                    required
+                  />
+                  <Form.Text className={style.orientacao}>
+                    Insira a especiladade do dentista
+                  </Form.Text>
                 </Form.Group>
               </div>
 

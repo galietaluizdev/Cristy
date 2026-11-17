@@ -112,13 +112,14 @@ public class ConsultaAplicacao(
     private static async Task ValidacaoGeral(Consulta c)
     {
         int anoMinimo = DateOnly.FromDateTime(DateTime.Now).Year;
+
         if (c == null)
         {
             throw new Exception("Consulta não pode ser vazio");
         }
-        if (c.DataConsulta.Year != anoMinimo)
+        if (c.DataConsulta.Year < anoMinimo)
         {
-            throw new Exception("Data invalida, deve ser do mesmo ano ");
+            throw new Exception($"Data invalida, deve ser do ano vigente: {anoMinimo} , o ano informado foi: {c.DataConsulta.Year}");
         }
         if (c.PacienteId < 0)
         {
