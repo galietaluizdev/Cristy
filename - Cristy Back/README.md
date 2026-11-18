@@ -12,7 +12,7 @@ O projeto tem duas fases:
 
 ### Requisitos
 
-- .NET X SDK
+- .NET 10.0 SDK
 - SQL Server Express
 - SSMS (opcional)
 

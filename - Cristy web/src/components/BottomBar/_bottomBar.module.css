@@ -1,0 +1,47 @@
+.bottombar_conteudo {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 100;
+
+  max-width: 700px;
+  height: 65px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 30px;
+  background-color: #3d49a5;
+  box-shadow: 0 0 15px #3a01da41;
+}
+
+.bottombar_header {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.bottombar_corpo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icone {
+  height: 24px;
+  width: auto;
+}
+
+.linha_vertical {
+  height: 100%;
+  width: 1px;
+  margin: 0;
+  border: none;
+  background-color: #fff;
+}
+
+.pagina_conteudo {
+  padding-bottom: 105px;
+}

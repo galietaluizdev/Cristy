@@ -2,6 +2,7 @@ using Cristy.Aplicacao.Interfaces;
 using Cristy.Aplicacao.Models.Consulta.Requisicao;
 using Cristy.Aplicacao.Models.Consulta.Resposta;
 using Cristy.Dominio.Entidades;
+using Cristy.Dominio.Enumeradores;
 using Cristy.Dominio.Interfaces;
 
 namespace Cristy.Aplicacao;
@@ -27,7 +28,7 @@ public class ConsultaAplicacao(
             DentistaId = d.DentistaId,
             PacienteNome = d.Paciente.Nome,
             DentistaNome = d.Dentista.Nome,
-            Status = d.Status
+            Status = d.Status.ToString()
         }).ToList();
 
         return resposta;
@@ -84,7 +85,7 @@ public class ConsultaAplicacao(
             Descricao = d.Descricao,
             HistoricoProcessado = d.HistoricoProcessado,
             InformacoesRelevantes = d.InformacoesRelevantes,
-            Status = d.Status,
+            Status = d.Status.ToString(),
             Ativo = d.Ativo
         };
         return resposta;
@@ -111,13 +112,14 @@ public class ConsultaAplicacao(
     private static async Task ValidacaoGeral(Consulta c)
     {
         int anoMinimo = DateOnly.FromDateTime(DateTime.Now).Year;
+
         if (c == null)
         {
             throw new Exception("Consulta não pode ser vazio");
         }
-        if (c.DataConsulta.Year != anoMinimo)
+        if (c.DataConsulta.Year < anoMinimo)
         {
-            throw new Exception("Data invalida, deve ser do mesmo ano ");
+            throw new Exception($"Data invalida, deve ser do ano vigente: {anoMinimo} , o ano informado foi: {c.DataConsulta.Year}");
         }
         if (c.PacienteId < 0)
         {

@@ -10,5 +10,5 @@ public class ConsultaResumoDTO
     public int DentistaId { get; set; }
     public string PacienteNome { get; set; }
     public string DentistaNome { get; set; }
-    public StatusConsulta Status { get; set; } // sistema
+    public string Status { get; set; } // sistema
 }

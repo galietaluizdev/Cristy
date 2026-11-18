@@ -109,6 +109,9 @@ namespace Cristy.Repositorio.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CRO")
+                        .IsUnique();
+
                     b.ToTable("Dentista", (string)null);
                 });
 

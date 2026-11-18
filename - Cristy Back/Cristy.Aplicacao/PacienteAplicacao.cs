@@ -112,9 +112,9 @@ namespace Cristy.Aplicacao
             {
                 throw new Exception("E-mail não pode ser vazio");
             }
-            if (string.IsNullOrEmpty(p.Telefone))
+            if (string.IsNullOrEmpty(p.Telefone) || p.Telefone.Length != 11)
             {
-                throw new Exception("Telefone invalida não pode ser vazio");
+                throw new Exception("Telefone invalido, deve possuir 15 digitos no formato (01)2 3456-7890 ");
             }
             if (p.DataDeNascimento.Year < anoMinimo)
             {
