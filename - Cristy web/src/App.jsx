@@ -11,12 +11,13 @@ import { ConsultaEditar } from "./pages/Consultas/ConsultaEditar/ConsultaEditar"
 import { PacienteNovo } from "./pages/Pacientes/PacienteNovo/PacienteNovo";
 import { DentistaNovo } from "./pages/Dentistas/DentistaNovo/DentistaNovo";
 import { ConsultaNovo } from "./pages/Consultas/ConsultaNovo/ConsultaNovo";
+import { Login } from "./components/Login/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={}/> */}
+        <Route path="/" element={<Login/>}/>
         <Route path="/pacientes" element={<Pacientes />} />
         <Route path="/paciente/editar" element={<PacienteEditar />} />
         <Route path="/paciente/novo" element={<PacienteNovo />} />
